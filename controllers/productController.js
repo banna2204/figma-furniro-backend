@@ -53,3 +53,13 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+export const clearCart = async (req, res) => {
+    req.cart.items = [];
+    try {
+        await req.cart.save();
+        res.json({ items: [] });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
