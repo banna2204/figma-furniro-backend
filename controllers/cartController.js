@@ -57,13 +57,13 @@ export const addItemToCart = async (req, res) => {
 
 // PUT /api/cart/update/:id - Update an item's quantity in the cart
 export const updateCartItemQuantity = async (req, res) => {
-    // Get the item's ID from the URL parameters
+    // URL se cart item ki ID lo
     const { id } = req.params; 
-    // Get the new quantity from the request body
+    // Body se naya quantity lo
     const { quantity } = req.body; 
 
-    // Find the item to update
-    const itemToUpdate = req.cart.items.find(item => item.productId.toString() === id);
+    // Mongoose ke 'id()' method ka use karke cart item dhoondo
+    const itemToUpdate = req.cart.items.id(id);
 
     if (itemToUpdate) {
         itemToUpdate.quantity = quantity;
