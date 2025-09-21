@@ -57,12 +57,9 @@ export const addItemToCart = async (req, res) => {
 
 // PUT /api/cart/update/:id - Update an item's quantity in the cart
 export const updateCartItemQuantity = async (req, res) => {
-    // URL se cart item ki ID lo
     const { id } = req.params; 
-    // Body se naya quantity lo
     const { quantity } = req.body; 
 
-    // Mongoose ke 'id()' method ka use karke cart item dhoondo
     const itemToUpdate = req.cart.items.id(id);
 
     if (itemToUpdate) {
@@ -83,7 +80,8 @@ export const updateCartItemQuantity = async (req, res) => {
 // DELETE /api/cart/remove/:id - Remove an item from the cart
 export const removeItemFromCart = async (req, res) => {
     const { id } = req.params;
-    req.cart.items = req.cart.items.filter(item => item.productId.toString() !== id);
+    // Ab hum CartItem ki _id se filter kar rahe hain, na ki productId se
+    req.cart.items = req.cart.items.filter(item => item._id.toString() !== id);
 
     try {
         await req.cart.save();
