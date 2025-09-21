@@ -55,10 +55,15 @@ export const addItemToCart = async (req, res) => {
     }
 };
 
-// PUT /api/cart/update - Update an item's quantity in the cart
+// PUT /api/cart/update/:id - Update an item's quantity in the cart
 export const updateCartItemQuantity = async (req, res) => {
-    const { productId, quantity } = req.body;
-    const itemToUpdate = req.cart.items.find(item => item.productId.toString() === productId);
+    // Get the item's ID from the URL parameters
+    const { id } = req.params; 
+    // Get the new quantity from the request body
+    const { quantity } = req.body; 
+
+    // Find the item to update
+    const itemToUpdate = req.cart.items.find(item => item.productId.toString() === id);
 
     if (itemToUpdate) {
         itemToUpdate.quantity = quantity;

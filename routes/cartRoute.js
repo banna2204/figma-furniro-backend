@@ -7,7 +7,8 @@ router.use(getCommonCart);
 
 router.get('/', getCart);
 router.post('/add', addItemToCart);
-router.put('/update', updateCartItemQuantity);
+// Update the route to accept an ID parameter
+router.put('/update/:id', updateCartItemQuantity); 
 router.delete('/remove/:id', removeItemFromCart);
 router.delete('/clear', clearCart);
 
